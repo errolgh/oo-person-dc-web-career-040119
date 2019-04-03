@@ -1,13 +1,12 @@
 require 'pry'
 
+
+
 class Person
-
-    attr_reader :name #getter, because name cannot be changed
-    attr_writer :get_paid
-
-    # def get_paid=(salary)
-    #   @bank_account = @bank_account += salary
-    # end
+    # 'reader' => getter,
+    # 'writer' => setter
+    attr_reader(:happiness, :hygiene, :bank_account, :name)
+    attr_writer(:hygiene, :bank_account)
 
   def initialize(name, bank_account=25, happiness=8, hygiene=8)
     @name = name
@@ -15,7 +14,6 @@ class Person
     @happiness = happiness
     @hygiene = hygiene
   end
-
 
   def clean?
     if @hygiene > 7
@@ -50,12 +48,36 @@ end
     puts "♪ another one bites the dust ♫"
   end
 
+  def happiness=(happiness_value)
+    puts "beginning of happiness=() of #{self.name}"
+  #  block that changes/checks happiness' value
+  @happiness = happiness_value
+
+
+    if @happiness > 10
+      @happiness = 10
+    elsif
+    @happiness < 0
+    @happiness = 0
+    end
+    
+      puts "end of happiness=() of #{self.name}"
+end
   #method should accept another instance of the Person class, or "friend".
   def call_friend(friend)
+    puts "beginning of call_friend method of #{self.name}"
     #The method should increment the caller and the callee's happiness points by three.
 
 
-    #If Stella calls her friend Felix, the method should return "Hi Felix! It's Stella. How are you?"
+    friend.happiness = friend.happiness + 3
+    self.happiness += 3
+    puts "Hi #{friend.name}! It's #{self.name}. How are you?"
+
+    puts "end of call_friend method of #{self.name}"
+
+
+    #If Stella calls her friend Felix, the method should return
+    # "Hi Felix! It's Stella. How are you?"
   end
 
 
@@ -68,5 +90,9 @@ end
   end
 end
 
-binding.pry
+# marcus = Person.new("Marcus")
+# errol = Person.new("Errol")
+
+#marcus.happiness(errol)
+
 puts "hi"
